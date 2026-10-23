@@ -1,0 +1,107 @@
+*.class
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+*.hprof
+
+*.jfr
+
+.gradle
+gradle.properties
+
+*.lck
+*.1
+*.2
+*.log
+.mine*
+/externalgames
+NVIDIA
+minecraft-exported-crash-info*
+hmcl-exported-logs-*
+terracotta-log-*
+hmcl-mod-update-list-*
+*.hmcl-theme
+/.java/
+/.local/
+/.cache/
+
+# IANA Language Subtag Registry
+language-subtag-registry
+
+# gradle build
+/build/
+/HMCL/build/
+/HMCLCore/build/
+/HMCLBoot/build/
+/minecraft/libraries/HMCLTransformerDiscoveryService/build/
+/minecraft/libraries/HMCLMultiMCBootstrap/build/
+/buildSrc/build/
+
+# idea
+.idea
+/out/
+/HMCL/out/
+/HMCLCore/out/
+/minecraft/libraries/HMCLTransformerDiscoveryService/out/
+/minecraft/libraries/HMCLMultiMCBootstrap/out/
+
+# eclipse
+/bin/
+/HMCL/bin/
+/HMCLBoot/bin/
+/HMCLCore/bin/
+/minecraft/libraries/HMCLTransformerDiscoveryService/bin/
+/minecraft/libraries/HMCLMultiMCBootstrap/bin/
+.classpath
+.project
+.settings
+
+# netbeans
+.nb-gradle
+
+*.exe
+
+# macos
+.DS_Store
+
+# vscode
+.vscode/
+
+# test
+/hmcl.json
+/.hmcl.json
+/.hmcl/
+
+# AI
+/.gemini/
+!/.gemini/config.yaml
+.codex
+/.gradle-*/
+
+# Launcher delivery and isolated acceptance runs
+/dist/
+/qa/
+__pycache__/
+*.pyc
+
+# Local credentials and account/session state must not enter source archives.
+.env
+.env.*
+!.env.example
+!.env.sample
+/.secrets/
+/credentials*.json
+/accounts*.json
+/account-private-data*.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa
+id_ed25519
+*.sqlite
+*.sqlite3
+*.db
+*.dmp

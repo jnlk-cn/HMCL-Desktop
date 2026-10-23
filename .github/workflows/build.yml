@@ -1,0 +1,39 @@
+name: Build
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      VERSION_ROOT: '3.17.0'
+      BUILD_NUMBER: '362'
+      VERSION_TYPE: unofficial
+      JAVA_TOOL_OPTIONS: -Djava.awt.headless=true
+    steps:
+      - uses: actions/checkout@v6
+      - name: Check supported account surfaces
+        run: python3 scripts/verify_account_surface.py
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v5
+      - name: Compile, test and package launcher executables
+        run: xvfb-run --auto-servernum bash ./gradlew --no-daemon --max-workers=4 :HMCL:makeExecutables :HMCL:test :HMCLCore:test :HMCLBoot:test :HMCL:checkstyleMain :HMCL:checkstyleTest :HMCLCore:checkstyleMain :HMCLCore:checkstyleTest :HMCLBoot:checkstyleMain --console=plain
+      - name: Check packaged account surfaces
+        run: python3 scripts/verify_account_surface.py --artifacts
+      - uses: actions/upload-artifact@v7
+        with:
+          name: HMCL-launcher
+          path: |
+            HMCL/build/libs/HMCL-*.jar
+            HMCL/build/libs/HMCL-*.exe
+            HMCL/build/libs/HMCL-*.sh
+          retention-days: 14

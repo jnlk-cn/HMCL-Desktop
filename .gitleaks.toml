@@ -1,0 +1,16 @@
+title = "HMCL source credential scanning"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "The Microsoft desktop public client ID is an application identifier, not a client secret."
+regexTarget = "secret"
+regexes = ['''^6c2c7e5b-72e9-414b-959b-3fcbbea005bf$''']
+
+[[allowlists]]
+description = "These retained upstream QQ group invitation links are already public; authKey is not an application credential."
+condition = "AND"
+paths = ['''^HMCL/(terracotta-template\.json|src/main/resources/assets/terracotta\.json)$''']
+regexTarget = "line"
+regexes = ['''https://qm\.qq\.com/cgi-bin/qm/qr\?''']
